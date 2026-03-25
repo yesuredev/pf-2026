@@ -1,0 +1,74 @@
+/* =================================
+   COLOR
+================================= */
+
+$color-bg: #0f0f0f;
+$color-surface: #1a1a1a;
+
+$color-text: #ffffff;
+$color-text-sub: rgba(255, 255, 255, 0.6);
+
+$color-primary: #7c5cff;
+$color-primary-light: #9b83ff;
+
+$color-border: rgba(255, 255, 255, 0.08);
+
+/* =================================
+   FONT
+================================= */
+
+$font-base:
+  "Pretendard",
+  system-ui,
+  -apple-system,
+  sans-serif;
+
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-md: 16px;
+$font-size-lg: 20px;
+$font-size-xl: 28px;
+$font-size-hero: 56px;
+
+/* =================================
+   SPACING
+================================= */
+
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 24px;
+$space-6: 32px;
+$space-7: 48px;
+$space-8: 80px;
+
+/* =================================
+   LAYOUT
+================================= */
+
+$container-width: 1200px;
+
+/* =================================
+   Z-INDEX
+================================= */
+
+$z-header: 100;
+$z-modal: 1000;
+
+/* =================================
+   BREAKPOINT
+================================= */
+
+$desktop: 1200px;
+$tablet: 1024px;
+$mobile: 768px;
+$mobile-sm: 480px;
+
+/* =================================
+   TRANSITION
+================================= */
+
+$transition-fast: 0.15s ease;
+$transition-base: 0.25s ease;
+$transition-slow: 0.4s ease;

@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 // import "./index.css";
 import "./styles/abstracts/_variables.scss";
 import "./styles/abstracts/_mixins.scss";
-import "./styles/base/reset.scss";
+import "./styles/base/_reset.scss";
 import "./styles/main.scss";
 import App from "./App.jsx";
 
