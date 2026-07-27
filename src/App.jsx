@@ -19,7 +19,7 @@ function App() {
           <h1>Get started</h1>
           <p>
             Edit <code>src/App.jsx</code> and save to test{" "}
-            <code>HMR TTEESSTT</code>
+            <code>HMR TTEESST</code>
           </p>
         </div>
         <button
@@ -27,7 +27,7 @@ function App() {
           className="counter"
           onClick={() => setCount((count) => count + 1)}
         >
-          Count is {count}
+          Your Count is {count}
         </button>
       </section>
 
