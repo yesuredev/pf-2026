@@ -1,0 +1,81 @@
+// 변수 설정
+$color-1: #fff; // 1번: 곡선 커튼 (앞)
+$color-2: #f2f2f2; // 2번: 평평한 커튼 (뒤)
+$duration: 0.5s;
+$stagger: 0.18s;
+
+// 마스크 SVG 인라인 생성 믹스인 (Q 제어점의 Y 좌표만 가변적으로 전달)
+@mixin curve-mask($qy) {
+  $svg: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0,0 L100,0 L100,100 Q50,#{$qy} 0,100 Z' fill='black'/></svg>";
+  -webkit-mask-image: url("data:image/svg+xml;utf8,#{$svg}");
+  mask-image: url("data:image/svg+xml;utf8,#{$svg}");
+}
+
+.curtain-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.curtain-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  // [1번 커튼] 올라가면서 곡률이 깊어지는 1번 커튼
+  &:nth-child(1) {
+    z-index: 2;
+    background-color: $color-1;
+
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+
+    // 이동과 곡률 변화를 동시에 수행하는 키프레임 적용
+    animation: curvedCurtainUp $duration cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  }
+
+  // [2번 커튼] 뒤따라 올라오는 평평한 2번 커튼
+  &:nth-child(2) {
+    z-index: 1;
+    background-color: $color-2;
+
+    animation: flatCurtainUp $duration cubic-bezier(0.76, 0, 0.24, 1) $stagger
+      forwards;
+  }
+}
+
+// 1번 곡선 커튼 전용 키프레임
+@keyframes curvedCurtainUp {
+  0% {
+    transform: translateY(0);
+    // [완만한 곡률] 바닥에 있을 때는 제어점이 93으로 거의 평평에 가까움
+    @include curve-mask(93);
+  }
+  45% {
+    // [중간 가속 구간] 가속이 붙으며 곡률이 점점 커짐 (Q: 83)
+    @include curve-mask(83);
+  }
+  100% {
+    transform: translateY(-100%);
+    // [최고조 곡률] 위로 빠져나가면서 쫀득하고 깊은 오목 곡률 완성 (Q: 75)
+    @include curve-mask(75);
+    visibility: hidden;
+  }
+}
+
+// 2번 평평한 커튼 키프레임
+@keyframes flatCurtainUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+    visibility: hidden;
+  }
+}

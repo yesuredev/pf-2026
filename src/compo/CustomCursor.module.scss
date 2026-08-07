@@ -1,0 +1,63 @@
+/* 기본 커서 색상 변수 지정 */
+:root {
+  --cursor-color: rgba(43, 112, 246, 0.8);
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  /* 마우스 포인터 정중앙에 커서 배치 */
+  margin-top: -10px;
+  margin-left: -10px;
+
+  border-radius: 50%;
+  background-color: var(--cursor-color);
+  pointer-events: none;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 위치 이동 transition */
+  transform: translate3d(var(--x, -100px), var(--y, -100px), 0);
+  /* 크기, 색상, 위치의 부드러운 변화 */
+  transition:
+    transform 0.1s ease-out,
+    width 0.3s ease,
+    height 0.3s ease,
+    margin 0.3s ease,
+    background-color 0.3s ease;
+
+  /* 텍스트 스타일 */
+  .text {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    transform: scale(0.8);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+}
+
+/* 특정 영역에 들어갔을 때 (data-cursor-active 커서 반응) */
+:root[data-cursor-active="true"] {
+  .cursor {
+    /* 커서 크기 확대 (텍스트가 들어갈 수 있게) */
+    width: 80px;
+    height: 80px;
+    margin-top: -40px;
+    margin-left: -40px;
+
+    .text {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}

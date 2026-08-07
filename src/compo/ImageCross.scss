@@ -1,0 +1,183 @@
+// 1. Pin 영역 및 스크롤 타임라인
+.scroll-wrapper {
+  height: 250vh;
+  view-timeline-name: --pin-timeline;
+  view-timeline-axis: block;
+  background-color: #ffffff;
+}
+
+.sticky-viewport {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5vw;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+// 2. 반응형 그리드 레이아웃
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 40px);
+  width: 100%;
+  max-width: 1000px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+  }
+}
+
+// 3. 카드 및 레이어 (40% 이동 기준 비율 적용)
+.card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4.5; // 넓어진 텍스트 영역에 맞춰 세로 비율 살짝 확장
+  display: flex;
+  flex-direction: column;
+
+  // 텍스트 슬롯: 20% -> 28.6%로 넓힘
+  .text-slot {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 28.6%; // 카드 전체 높이의 28.6% 차지
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
+    font-size: clamp(0.9rem, 1.5vw, 1.3rem);
+    font-weight: 600;
+    color: #000000;
+    line-height: 1.2;
+    z-index: 1;
+
+    &.text-top {
+      top: 0;
+    }
+    &.text-bottom {
+      bottom: 0;
+    }
+  }
+
+  // 이미지 박스: 80% -> 71.4%로 변경 (71.4%의 40% = 28.6% 이동)
+  .image-box {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 71.4%; // 카드 전체 높이의 71.4% 차지
+    border-radius: clamp(16px, 2.5vw, 32px);
+    overflow: hidden;
+    filter: grayscale(100%);
+    z-index: 2;
+    background-color: #ffffff;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+// 4. 애니메이션 바인딩
+.card-down {
+  .image-box {
+    top: 0;
+    animation: moveResponsiveDown linear both;
+    animation-timeline: --pin-timeline;
+    animation-range: contain 20% contain 80%;
+  }
+
+  .text-bottom {
+    animation: hideOldText linear both;
+    animation-timeline: --pin-timeline;
+    animation-range: contain 20% contain 80%;
+  }
+
+  .text-top {
+    animation: showNewText linear both;
+    animation-timeline: --pin-timeline;
+    animation-range: contain 20% contain 80%;
+  }
+}
+
+.card-up {
+  .image-box {
+    bottom: 0;
+    animation: moveResponsiveUp linear both;
+    animation-timeline: --pin-timeline;
+    animation-range: contain 20% contain 80%;
+  }
+
+  .text-top {
+    animation: hideOldText linear both;
+    animation-timeline: --pin-timeline;
+    animation-range: contain 20% contain 80%;
+  }
+
+  .text-bottom {
+    animation: showNewText linear both;
+    animation-timeline: --pin-timeline;
+    animation-range: contain 20% contain 80%;
+  }
+}
+
+// 5. 상대 비율 키프레임 (요청하신 40% 적용)
+@keyframes moveResponsiveDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(40%);
+  }
+}
+
+@keyframes moveResponsiveUp {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-40%);
+  }
+}
+
+// 6. 텍스트 전환 타이밍 (교차 노출 방지)
+@keyframes hideOldText {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  40% {
+    opacity: 1;
+  }
+  45%,
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes showNewText {
+  0%,
+  55% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  60% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}

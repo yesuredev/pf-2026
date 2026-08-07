@@ -1,0 +1,69 @@
+// SVG 비율에 맞춰서 정사각형에 가깝게 수정 (형님 SVG 비율에 맞추세요)
+$btn-width: 400px;
+$btn-height: 400px;
+
+.proximity-area {
+  padding: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-inner {
+  width: $btn-width;
+  height: $btn-height;
+  position: relative;
+
+  // [핵심] 이제 네모난 틀의 성질을 모두 버립니다!
+  background-color: transparent;
+  border-radius: 0;
+  overflow: visible; // SVG 꼬리표가 잘리지 않게
+
+  cursor: pointer;
+  transform: translateZ(0);
+}
+
+// SVG를 감싸는 레이어 공통 속성
+.base-layer,
+.fill-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; // 마우스 간섭 방지
+}
+
+.bubble-svg {
+  width: 100%;
+  height: 100%;
+  display: block; // 하단 여백 제거
+}
+
+.fill-layer {
+  // z-index는 base-layer보다 위에 오도록 자동 배치됨
+  // 이 레이어 전체를 아까 짠 GSAP clip-path가 둥글게 깎아먹습니다.
+}
+
+.text-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  pointer-events: none;
+
+  p {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .arrow {
+    font-size: 2.2rem;
+  }
+}
