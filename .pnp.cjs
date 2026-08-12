@@ -38,7 +38,6 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-hooks", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:7.1.1"],\
           ["eslint-plugin-react-refresh", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:0.5.3"],\
           ["globals", "npm:17.8.0"],\
-          ["gsap", "npm:3.15.0"],\
           ["react", "npm:19.2.8"],\
           ["react-dom", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:19.2.8"],\
           ["react-router-dom", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:7.18.2"],\
@@ -404,7 +403,7 @@ const RAW_RUNTIME_STATE =
           ["@gsap/react", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:2.1.2"],\
           ["@types/gsap", null],\
           ["@types/react", "npm:19.2.17"],\
-          ["gsap", "npm:3.15.0"],\
+          ["gsap", null],\
           ["react", "npm:19.2.8"]\
         ],\
         "packagePeers": [\
@@ -1008,7 +1007,6 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-hooks", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:7.1.1"],\
           ["eslint-plugin-react-refresh", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:0.5.3"],\
           ["globals", "npm:17.8.0"],\
-          ["gsap", "npm:3.15.0"],\
           ["react", "npm:19.2.8"],\
           ["react-dom", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:19.2.8"],\
           ["react-router-dom", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:7.18.2"],\
@@ -1526,15 +1524,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/graceful-fs-npm-4.2.11-24bb648a68-10c0.zip/node_modules/graceful-fs/",\
         "packageDependencies": [\
           ["graceful-fs", "npm:4.2.11"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["gsap", [\
-      ["npm:3.15.0", {\
-        "packageLocation": "../../../.yarn/berry/cache/gsap-npm-3.15.0-6248092018-10c0.zip/node_modules/gsap/",\
-        "packageDependencies": [\
-          ["gsap", "npm:3.15.0"]\
         ],\
         "linkType": "HARD"\
       }]\

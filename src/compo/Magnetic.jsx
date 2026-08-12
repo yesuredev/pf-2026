@@ -1,10 +1,9 @@
 import React, { useRef } from "react";
-import gsap from "gsap";
 
 const Magnetic = ({
   children,
-  proximity = 1, // 마중 나가는 레이더 반경 (기본값 60px)
-  strength = 0.1, // 도형 전체가 따라가는 강도
+  proximity = 20, // 마중 나가는 레이더 반경
+  strength = 0.2, // 도형 전체가 따라가는 강도
   innerStrength = 0.1, // 내부 텍스트가 따라가는 강도 (입체감 패럴랙스용)
 }) => {
   const targetRef = useRef(null);
@@ -20,62 +19,55 @@ const Magnetic = ({
     const distanceX = e.clientX - centerX;
     const distanceY = e.clientY - centerY;
 
-    // 1. 메인 타겟(도형) 이동
-    gsap.to(targetRef.current, {
-      x: distanceX * strength,
-      y: distanceY * strength,
-      duration: 0.1,
-      ease: "power2.out",
-    });
+    // 1. 마우스 이동 추적 시: 짧고 부드러운 Ease-Out 적용
+    const trackTransition =
+      "transform 0.1s cubic-bezier(0.215, 0.61, 0.355, 1)";
 
-    // 2. 패럴랙스 입체감을 줄 내부 텍스트 이동
-    // 자식 요소 중에 'magnetic-inner'라는 클래스가 있으면 자동으로 인식해서 미세하게 움직여줍니다!
+    targetRef.current.style.transition = trackTransition;
+    targetRef.current.style.transform = `translate3d(${distanceX * strength}px, ${distanceY * strength}px, 0)`;
+
+    // 2. 패럴랙스 입체감을 줄 내부 텍스트 이동 (.magnetic-inner)
     const innerTarget = targetRef.current.querySelector(".magnetic-inner");
     if (innerTarget) {
-      gsap.to(innerTarget, {
-        x: distanceX * innerStrength,
-        y: distanceY * innerStrength,
-        duration: 0.4,
-        ease: "power2.out",
-      });
+      innerTarget.style.transition =
+        "transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1)";
+      innerTarget.style.transform = `translate3d(${distanceX * innerStrength}px, ${distanceY * innerStrength}px, 0)`;
     }
   };
 
   const handleMouseLeave = () => {
     if (!targetRef.current) return;
 
-    // 마우스가 레이더 반경을 벗어나면 제자리로 튕기듯 복귀
-    gsap.to(targetRef.current, {
-      x: 0,
-      y: 0,
-      duration: 0.8,
-      ease: "elastic.out(1, 0.3)",
-    });
+    // 복귀 시: GSAP elastic.out과 거의 동일한 튕김을 구현하는 cubic-bezier
+    const elasticTransition =
+      "transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)";
 
+    // 1. 메인 타겟 원위치
+    targetRef.current.style.transition = elasticTransition;
+    targetRef.current.style.transform = "translate3d(0px, 0px, 0)";
+
+    // 2. 내부 텍스트 원위치
     const innerTarget = targetRef.current.querySelector(".magnetic-inner");
     if (innerTarget) {
-      gsap.to(innerTarget, {
-        x: 0,
-        y: 0,
-        duration: 0.8,
-        ease: "elastic.out(1, 0.3)",
-      });
+      innerTarget.style.transition = elasticTransition;
+      innerTarget.style.transform = "translate3d(0px, 0px, 0)";
     }
   };
 
   return (
-    // 이 영역이 '레이더망' 역할을 합니다.
     <div
+      className="proximity-area"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
         display: "inline-flex",
-        padding: `${proximity}px`, // 프롭스로 받은 반경 크기 적용
+        padding: `${proximity}px`,
         margin: `${-proximity}px`,
       }}
     >
-      {/* 이 div 안의 내용물이 실제로 움직이는 타겟이 됩니다 */}
-      <div ref={targetRef}>{children}</div>
+      <div ref={targetRef} style={{ willChange: "transform" }}>
+        {children}
+      </div>
     </div>
   );
 };

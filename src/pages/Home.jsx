@@ -9,11 +9,13 @@ import ImageDriven from "../compo/ImageDriven.jsx";
 import ImageCross from "../compo/ImageCross.jsx";
 import ParallaxThumbs from "../compo/ParallaxThumbs.jsx";
 import HorizontalScroll from "../compo/HorizontalScroll.jsx";
+import ImageComparison from "../compo/ImageComparison.jsx";
 
 export default function Home() {
   return (
     <>
       {/* <Nav /> */}
+      <ImageComparison />
       <ScrollShowcase />
       <HorizontalScroll />
       <ParallaxThumbs />
