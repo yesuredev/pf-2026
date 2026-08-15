@@ -29,7 +29,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@eslint/js", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:10.0.1"],\
-          ["@gsap/react", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:2.1.2"],\
           ["@types/react", "npm:19.2.17"],\
           ["@types/react-dom", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:19.2.3"],\
           ["@vitejs/plugin-react", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:6.0.4"],\
@@ -385,32 +384,6 @@ const RAW_RUNTIME_STATE =
           ["@eslint/core", "npm:1.2.1"],\
           ["@eslint/plugin-kit", "npm:0.7.2"],\
           ["levn", "npm:0.4.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@gsap/react", [\
-      ["npm:2.1.2", {\
-        "packageLocation": "../../../.yarn/berry/cache/@gsap-react-npm-2.1.2-85d40ef16c-10c0.zip/node_modules/@gsap/react/",\
-        "packageDependencies": [\
-          ["@gsap/react", "npm:2.1.2"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:2.1.2", {\
-        "packageLocation": "./.yarn/__virtual__/@gsap-react-virtual-87815209b2/4/.yarn/berry/cache/@gsap-react-npm-2.1.2-85d40ef16c-10c0.zip/node_modules/@gsap/react/",\
-        "packageDependencies": [\
-          ["@gsap/react", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:2.1.2"],\
-          ["@types/gsap", null],\
-          ["@types/react", "npm:19.2.17"],\
-          ["gsap", null],\
-          ["react", "npm:19.2.8"]\
-        ],\
-        "packagePeers": [\
-          "@types/gsap",\
-          "@types/react",\
-          "gsap",\
-          "react"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -998,7 +971,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@eslint/js", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:10.0.1"],\
-          ["@gsap/react", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:2.1.2"],\
           ["@types/react", "npm:19.2.17"],\
           ["@types/react-dom", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:19.2.3"],\
           ["@vitejs/plugin-react", "virtual:de8c6b1e4a53f8d7517250e54cba94821c65dba51e204d9a8ce93971f35e3fbfa57dc45ccde97e450aef3c57bd60351db9db656b6de251129e3849a88a72ec49#npm:6.0.4"],\
