@@ -1,26 +1,19 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import heroImg from "./assets/hero.png";
-
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import Nav from "./compo/Nav.jsx";
-import Home from "./pages/Home.jsx";
-import Works from "./pages/Works.jsx";
-import CustomCursor from "./compo/CustomCursor.jsx";
+import Header from "./compo/Header";
+import Home from "./pages/Home";
+import Works from "./pages/Works";
+import CustomCursor from "./compo/CustomCursor";
 
-// import Main from "./assets/HorizontalScroll.jsx";
 import "./App.css";
 
 // 공통 레이아웃 (페이지가 바뀌어도 Nav는 상단에 유지됨)
 function Layout() {
   return (
     <>
-      <Nav />
+      <Header />
       <main>
         <CustomCursor />
         <Outlet />{" "}
-        {/* 라우트 경로에 따라 변경될 페이지 컴포넌트가 들어오는 위치 */}
       </main>
     </>
   );
@@ -28,7 +21,7 @@ function Layout() {
 
 export default function App() {
   return (
-    <BrowserRouter basename="/pf-2026">
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -39,21 +32,3 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
-// function App() {
-
-//   return (
-//     <>
-//       <Nav />
-//       <ParallaxThumbs />
-//       <ImageCross />
-//       <ImageDriven />
-//       <Curtain />
-//       <HorizontalScroll />
-//       <Main />
-//       <GetInTouch />
-//     </>
-//   );
-// }
-
-// export default App;

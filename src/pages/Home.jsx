@@ -10,13 +10,19 @@ import ImageCross from "../compo/ImageCross.jsx";
 import ParallaxThumbs from "../compo/ParallaxThumbs.jsx";
 import HorizontalScroll from "../compo/HorizontalScroll.jsx";
 import ImageComparison from "../compo/ImageComparison.jsx";
+import DurationButton from "../compo/DurationButton.jsx";
+// import Awards from "../compo/Awards.jsx";
+import Penguin from "../compo/Penguin.jsx";
 
 export default function Home() {
   return (
     <>
+      <DurationButton />
       {/* <Nav /> */}
-      <ImageComparison />
+      <Penguin />
+      {/* <Awards /> */}
       <ScrollShowcase />
+      <ImageComparison />
       <HorizontalScroll />
       <ParallaxThumbs />
       <ImageCross />

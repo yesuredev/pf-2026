@@ -1,0 +1,303 @@
+/* ===================================================
+   변수 & 애니메이션 타이밍
+   ================================================== */
+$bg-overlay: #ffffff;
+$text-dark: #111111;
+$text-light: #ffffff;
+$active-color: #2b70f6;
+$transition-ease: cubic-bezier(0.77, 0, 0.175, 1);
+
+// 반응형 수치 변수
+$side-padding: clamp(1.5rem, 5vw, 3.5rem);
+$top-bar-height: clamp(110px, 14vw, 200px);
+$likova-box-height: clamp(70px, 9vw, 130px);
+
+/* ===================================================
+   1. Home Scroll-Driven 키프레임 애니메이션
+   ================================================== */
+@keyframes logoCompressAndMove {
+  0% {
+    top: calc(#{$top-bar-height} + clamp(10px, 1.5vw, 20px));
+    left: $side-padding;
+    transform: scale(1);
+  }
+  100% {
+    /* deveb 로고 우측 상단 네비 라인에 맞춤 정렬 */
+    top: clamp(1.25rem, 3vw, 2.5rem);
+    left: calc(#{$side-padding} + clamp(5.5rem, 7vw, 7.5rem));
+    transform: scale(0.24);
+  }
+}
+
+@keyframes colorInvert {
+  0% {
+    color: $text-dark;
+  }
+  100% {
+    color: $text-light;
+  }
+}
+
+@keyframes bgInvert {
+  0% {
+    background-color: $text-dark;
+  }
+  100% {
+    background-color: $text-light;
+  }
+}
+
+/* ===================================================
+   2. 컴포넌트 기본 레이아웃
+   ================================================== */
+.header {
+  position: relative;
+  width: 100%;
+}
+
+/* 상단 탑바 (deveb + 햄버거) */
+.topBar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  // width: 100%;
+  box-sizing: border-box;
+  padding: clamp(1.25rem, 3vw, 2.5rem) $side-padding;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 11;
+
+  .brandLogo {
+    font-size: clamp(1.25rem, 2vw, 1.625rem);
+    font-weight: 700;
+    color: $text-dark;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    animation: colorInvert linear both;
+    animation-timeline: scroll(root);
+    animation-range: 15vh 25vh;
+  }
+
+  .hamburgerBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: clamp(1.75rem, 2.5vw, 2.25rem);
+    height: clamp(1.125rem, 1.8vw, 1.375rem);
+    padding: 0;
+    position: relative;
+
+    .line {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: $text-dark;
+      border-radius: 4px;
+      transition:
+        transform 0.3s $transition-ease,
+        top 0.3s $transition-ease,
+        background-color 0.3s ease;
+
+      animation: bgInvert linear both;
+      animation-timeline: scroll(root);
+      animation-range: 15vh 25vh;
+
+      &:nth-child(1) {
+        top: 0;
+      }
+      &:nth-child(2) {
+        top: calc(100% - 2px);
+      }
+    }
+
+    &.active {
+      .line {
+        top: calc(50% - 1px);
+        background-color: $text-dark !important; // 오버레이 위에서는 항상 다크
+        animation: none !important;
+
+        &:nth-child(1) {
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+
+    &:hover .line {
+      opacity: 0.7;
+    }
+  }
+}
+
+/* LIKOVA 플로팅 로고 */
+.floatingLogoArea {
+  position: fixed;
+  transform-origin: left top;
+  z-index: 101;
+  will-change: transform, top, left;
+
+  /* a 태그의 기본 밑줄 및 색상 상속 제거 */
+  a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    outline: none;
+  }
+
+  animation: logoCompressAndMove linear both;
+  animation-timeline: scroll(root);
+  animation-range: 0px 18vh;
+}
+
+.logoText {
+  margin: 0;
+  font-size: clamp(2.5rem, 6.2vw, 6rem);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  color: $text-dark;
+
+  animation: colorInvert linear both;
+  animation-timeline: scroll(root);
+  animation-range: 15vh 25vh;
+}
+
+/* 비대칭 화이트 배경 */
+.heroBg {
+  position: relative;
+  width: 100%;
+}
+
+.whiteBarTop {
+  width: 100%;
+  height: $top-bar-height;
+  background-color: #ffffff;
+}
+
+.whiteBoxLikova {
+  position: absolute;
+  width: clamp(280px, 50%, 650px);
+  border-bottom-right-radius: clamp(16px, 2.5vw, 40px);
+  height: $likova-box-height;
+  background-color: #ffffff;
+  z-index: 1;
+}
+
+/* ===================================================
+   3. 원형 확장 오버레이 메뉴
+   ================================================== */
+.menuOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: $bg-overlay;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  clip-path: circle(
+    0% at calc(100% - #{$side-padding} - 1rem) clamp(1.25rem, 3vw, 2.5rem)
+  );
+  transition: clip-path 0.8s $transition-ease;
+
+  &.open {
+    clip-path: circle(
+      160% at calc(100% - #{$side-padding} - 1rem) clamp(1.25rem, 3vw, 2.5rem)
+    );
+
+    .nav li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.nav {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 2.5vh, 2.25rem);
+    text-align: center;
+
+    li {
+      opacity: 0;
+      transform: translateY(1.875rem);
+      transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+
+      a {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 600;
+        color: $text-dark;
+        text-decoration: none;
+        transition:
+          color 0.2s,
+          opacity 0.2s;
+
+        &:hover {
+          opacity: 0.6;
+        }
+
+        &.active {
+          color: $active-color;
+        }
+      }
+    }
+  }
+}
+
+.menuOverlay.open {
+  .nav li {
+    @for $i from 1 through 5 {
+      &:nth-child(#{$i}) {
+        transition-delay: #{0.25 + ($i * 0.08)}s;
+      }
+    }
+  }
+}
+
+/* ===================================================
+   4. 메뉴 오픈 상태 (.menuOpen) 예외 처리
+   ================================================== */
+.header.menuOpen {
+  .topBar .brandLogo {
+    color: $text-dark !important;
+    animation: none !important;
+  }
+}
+
+/* ===================================================
+   5. 서브 페이지 상태 (.subpage)
+   ================================================== */
+.header.subpage {
+  .topBar .brandLogo {
+    color: $text-light;
+    animation: none;
+  }
+
+  .topBar .hamburgerBtn .line {
+    background-color: $text-light;
+    animation: none;
+  }
+
+  .floatingLogoArea {
+    top: clamp(1.25rem, 3vw, 2.5rem);
+    left: calc(#{$side-padding} + clamp(5.5rem, 7vw, 7.5rem));
+    transform: scale(0.24);
+    animation: none;
+  }
+
+  .logoText {
+    color: $text-light;
+    animation: none;
+  }
+}

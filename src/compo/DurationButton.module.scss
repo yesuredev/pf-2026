@@ -1,0 +1,127 @@
+:root {
+  --btn-height: 54px;
+  --color-default-bg: #1a1a1e;
+  --color-default-text: #e2e8f0;
+  --color-badge-bg: #27272a;
+  --color-hover-fill: #ffffff;
+  --color-hover-text: #000000;
+  --color-badge-hover-bg: #e2e8f0;
+  --duration-motion: 0.38s;
+  --ease-motion: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+    border-radius: 9999px;
+  }
+  100% {
+    transform: translateY(0%);
+    border-radius: 9999px;
+  }
+}
+
+@keyframes slideOutToBottom {
+  0% {
+    transform: translateY(0%) scaleY(1);
+    border-radius: 9999px;
+  }
+  50% {
+    border-radius: 40px 40px 70px 70px;
+  }
+  100% {
+    transform: translateY(120%) scaleY(1.2);
+    border-radius: 50%;
+  }
+}
+
+.slideBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: var(--btn-height);
+  padding: 0 24px;
+  background-color: var(--color-default-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  user-select: none;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-hover-fill);
+    z-index: 1;
+    pointer-events: none;
+    transform: translateY(120%);
+    border-radius: 50%;
+  }
+
+  &:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  // 마우스 진입 시
+  &.isEnter {
+    &::before {
+      animation: slideInFromTop var(--duration-motion) var(--ease-motion)
+        forwards;
+    }
+
+    .label {
+      color: var(--color-hover-text);
+    }
+
+    .badge {
+      color: var(--color-hover-text);
+      background-color: var(--color-badge-hover-bg);
+    }
+  }
+
+  // 마우스 이탈 시
+  &.isLeave {
+    &::before {
+      animation: slideOutToBottom var(--duration-motion) var(--ease-motion)
+        forwards;
+    }
+  }
+
+  .label {
+    position: relative;
+    z-index: 2;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-default-text);
+    letter-spacing: -0.2px;
+    transition: color var(--duration-motion) var(--ease-motion);
+  }
+
+  .badge {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    padding: 0 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-default-text);
+    background-color: var(--color-badge-bg);
+    border-radius: 9999px;
+    transition:
+      color var(--duration-motion) var(--ease-motion),
+      background-color var(--duration-motion) var(--ease-motion);
+  }
+}
