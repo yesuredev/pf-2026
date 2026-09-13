@@ -35,7 +35,7 @@ const DurationButton = ({
       onMouseLeave={handleMouseLeave}
       {...props}
     >
-      <span className={styles.label}>{label}</span>
+      <span className={styles.label}>{label}bbuuttoonn</span>
       {badge !== undefined && <span className={styles.badge}>{badge}</span>}
     </button>
   );

@@ -27,7 +27,7 @@ export default function Home() {
       <ParallaxThumbs />
       <ImageCross />
       <ImageDriven />
-      <Curtain />
+      {/* <Curtain /> */}
       {/* <Main /> */}
       <GetInTouch />
     </>
